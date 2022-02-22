@@ -1,4 +1,4 @@
-import Data.Char
+import Data.Char (toLower)
 fToAll func val [] = []
 fToAll func val (x:xs) = (x `func` val):fToAll func val xs
 
