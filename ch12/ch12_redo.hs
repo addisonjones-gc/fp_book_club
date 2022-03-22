@@ -5,6 +5,13 @@ newtype Height = Height Int deriving (Show)
 
 data Sex = Male | Female deriving (Show)
 
+data RhType = Pos | Neg deriving (Show)
+rhPosNeg :: RhType -> String
+rhPosNeg Pos = "+"
+rhPosNeg Neg = "-"
+data ABOType = A | B | AB | O deriving (Show)
+data BloodType = BloodType ABOType RhType
+
 class PatientAttrib a where
     attribPrintLn :: a -> String
 
@@ -23,12 +30,15 @@ instance PatientAttrib Height where
 instance PatientAttrib Sex where
     attribPrintLn a = "Sex: " ++ show a ++ "\n"
 
+instance PatientAttrib BloodType where
+    attribPrintLn (BloodType abo rh) = "BloodType: " ++ show abo ++ show rh
+
 data Patient = Patient { name :: Name 
                        , sex :: Sex 
                        , age :: Age 
                        , height :: Height 
                        , weight :: Weight 
-                    --    , bloodType :: BloodType 
+                       , bloodType :: BloodType 
                        }
 
 starLine :: String
@@ -46,6 +56,6 @@ patientSummary pat = starLine ++ "\n"
 
 main = do
 
-    let les = Patient (Name "Addison Jones") (Male) (Age 31) (Height 71) (Weight 175)
+    let les = Patient (Name "Addison Jones") (Male) (Age 31) (Height 71) (Weight 175) (BloodType B Pos)
 
     putStrLn (patientSummary les)
