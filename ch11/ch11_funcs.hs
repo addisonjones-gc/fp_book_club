@@ -16,9 +16,9 @@ makeAddress = (\number ->
 
 -- Q11.2
 -- Can't write this since head has to return a value from the list rather than a list?
-head :: [a] -> a
-head [] = []
-head (x:xs) = x
+-- head :: [a] -> a
+-- head [] = []
+-- head (x:xs) = x
 
 -- Q11.3
 myFoldl :: (a -> b -> a) -> a -> [b] -> a
