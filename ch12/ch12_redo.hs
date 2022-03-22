@@ -31,7 +31,7 @@ instance PatientAttrib Sex where
     attribPrintLn a = "Sex: " ++ show a ++ "\n"
 
 instance PatientAttrib BloodType where
-    attribPrintLn (BloodType abo rh) = "BloodType: " ++ show abo ++ show rh
+    attribPrintLn (BloodType abo rh) = "BloodType: " ++ show abo ++ rhPosNeg rh ++ "\n"
 
 data Patient = Patient { name :: Name 
                        , sex :: Sex 
@@ -51,6 +51,7 @@ patientSummary pat = starLine ++ "\n"
                      ++ attribPrintLn (age pat)
                      ++ attribPrintLn (height pat)
                      ++ attribPrintLn (weight pat)
+                     ++ attribPrintLn (bloodType pat)
                      ++ starLine
 
 
