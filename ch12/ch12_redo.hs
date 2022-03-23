@@ -5,10 +5,11 @@ newtype Height = Height Int deriving (Show)
 
 data Sex = Male | Female deriving (Show)
 
-data RhType = Pos | Neg deriving (Show)
-rhPosNeg :: RhType -> String
-rhPosNeg Pos = "+"
-rhPosNeg Neg = "-"
+data RhType = Pos | Neg deriving (Eq)
+
+instance Show RhType where
+    show a = if a == Pos then "+" else "-"
+
 data ABOType = A | B | AB | O deriving (Show)
 data BloodType = BloodType ABOType RhType
 
@@ -31,7 +32,7 @@ instance PatientAttrib Sex where
     attribPrintLn a = "Sex: " ++ show a ++ "\n"
 
 instance PatientAttrib BloodType where
-    attribPrintLn (BloodType abo rh) = "BloodType: " ++ show abo ++ rhPosNeg rh ++ "\n"
+    attribPrintLn (BloodType abo rh) = "BloodType: " ++ show abo ++ show rh ++ "\n"
 
 data Patient = Patient { name :: Name 
                        , sex :: Sex 
