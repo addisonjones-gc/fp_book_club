@@ -17,7 +17,7 @@ class PatientAttrib a where
     attribPrintLn :: a -> String
 
 instance PatientAttrib Age where
-    attribPrintLn (Age a) = "Age: " ++ show a ++ "\n"
+    attribPrintLn a = "Age: " ++ show a ++ "\n"
 
 instance PatientAttrib Name where
     attribPrintLn (Name a) = "Name: " ++ a ++ "\n"
