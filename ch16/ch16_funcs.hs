@@ -72,14 +72,13 @@ price (ToyItem toy) = toyPrice toy
 price _ = 0
 
 hpLovecraft :: Creator
-hpLovecraft = AuthorCreator 
-                (Author 
-                    (TwoInitialsWithLast 'H' 'P' "Lovecraft"))
+hpLovecraft = AuthorCreator $ Author $ TwoInitialsWithLast 'H' 'P' "Lovecraft"
+createdBy = ": Created by "
 
 madeBy :: StoreItem -> String
-madeBy (BookItem book) = mconcat [bookTitle book, ": Created by ", show (author book)] 
-madeBy (RecordItem record) = recordTitle record ++ ": Created by " ++ show (artist record) 
-madeBy (PampletItem pamphlet) = "Contact " ++ contact pamphlet ++ " for information"
+madeBy (BookItem book) = mconcat [bookTitle book, createdBy, show $ author book] 
+madeBy (RecordItem record) = mconcat [recordTitle record, createdBy, show $ artist record]
+madeBy (PampletItem pamphlet) = mconcat ["Contact ", contact pamphlet, " for information"]
 madeBy _ = "Creator unknown"
 
 
@@ -112,10 +111,10 @@ main :: IO()
 
 main = do
     print hpLovecraft
-    let necro = BookItem (Book hpLovecraft "123abc" "Necronomicon" 1923 12.99)
+    let necro = BookItem $ Book hpLovecraft "123abc" "Necronomicon" 1923 12.99
     print $ madeBy necro
 
-    let p = PampletItem (Pamphlet "What to do" "Tourist shit" "jason@gocaribou.com")
+    let p = PampletItem $ Pamphlet "What to do" "Tourist shit" "jason@gocaribou.com"
     print $ madeBy p
 
     let sq = CircleShape (Circle 4.00)

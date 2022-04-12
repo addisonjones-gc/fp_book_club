@@ -4,8 +4,8 @@ data Color = Red |
              Green | 
              Purple | 
              Orange |
+             White |
              Brown deriving (Show, Eq)
-
 instance Semigroup Color where
     (<>) Red Blue = Purple
     (<>) Blue Red = Purple
@@ -18,6 +18,9 @@ instance Semigroup Color where
              | all (`elem` [Blue,Yellow,Green]) [a,b] = Green
              | all (`elem` [Red,Yellow,Orange]) [a,b] = Orange
              | otherwise = Brown
+
+instance Monoid Color where
+    mempty = White
             
 
 type Events = [String]
@@ -41,6 +44,9 @@ main :: IO()
 main = do
     let pt = createPTable ["heads", "tails"] [0.5, 0.5]
     print pt
+
+    let myc = mconcat [Red, Blue, White]
+    print myc
 
 -- cartCombine :: (a -> b -> c) -> [a] -> [b] -> [c]
 -- cartCombine func l1 l2 = zipWith func newL1 cycledL2
